@@ -19,11 +19,27 @@ class Team(object):
         self.words = []
         while len(self.words) < 4:
             w = dictionary.get_word(meme_bool)
+            w = self.randomplayerify(w)
             if w not in self.words:
                 self.words.append(w)
 
+    def randomplayerify(self, word):
+        if "<RANDOM_PLAYER_NAME>" in word:
+            if len(self.players) < 1:
+                return word.replace("<RANDOM_PLAYER_NAME>", self.get_random_fake_name())
+            return word.replace("<RANDOM_PLAYER_NAME>", self.get_random_player_name())
+        return word
+
     def add_player(self, player):
         self.players.append(player)
+
+    def get_random_fake_name(self):
+        s = random.choice(["Aarav", "John", "Ciaran", "Chase", "Brad", "Bryce", "Zach", "Mercer", "Adam", "Jordan", "Josh", "Ryan", "Parker", "Caleb"])
+        return s
+
+    def get_random_player_name(self):
+        s = str(random.choice(self.players))
+        return s.split("#")[0]
 
     def get_player_list(self):
         return ", ".join(str(p) for p in self.players)

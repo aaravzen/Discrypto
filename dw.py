@@ -44,7 +44,7 @@ async def startgamm(ctx):
     else:
         teams = []
         random.shuffle(players)
-        teams.append(team.Team(players=players[:len(players)//2],meme_bool=True))
+        teams.append(team.Team(players=players[:len(players)//2], meme_bool=True))
         teams.append(team.Team(players=players[len(players)//2:], meme_bool=True))
         for p in players:
             if p.dm_channel == None:
